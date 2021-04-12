@@ -1,12 +1,15 @@
-{
-          "students":[
+{"students":[
                     {
-                              "id": 1,
-                              "name": "Imdadul Haque"
+                              "id":1,
+                              "name":"Imdadul Haque"
                     },
                     {
-                              "id": 2,
-                              "name": "Israt Jahan Maisha"
+                              "id":2,
+                              "name":"Israt Jahan Maisha"
+                    },
+                    {
+                              "id":3,
+                              "name":"Shampa Khatun"
                     }
           ]
 }
