@@ -26,6 +26,15 @@ const db = require('./db');
                     })
  });
 
+ app.get('/api/students/:id', (request, response) =>{
+          const id=parseInt(request.params.id);
+          db.getDBStudents()
+                    .then(students=>{
+                              const student = students.find(s => s.id === id);
+                              if(!student) response.status(404).send("No student found with this ID!");
+                              else response.send(student);
+                    })
+ })
  const port = 3000;
 //  const port = 3001;
 
