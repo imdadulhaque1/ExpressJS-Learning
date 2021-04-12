@@ -65,12 +65,13 @@ const db = require('./db');
                     })
  };
 
-
- app.get('/api/students', studentList);
- app.post('/api/students', newStudent);
- app.get('/api/students/:id', studentDetail);
- app.put('/api/students/:id', studentUpdate);
- app.delete('/api/students/:id', studentDelete);
+app.route('/api/students')
+          .get(studentList)
+          .post(newStudent);
+app.route('/api/students/:id')
+          .get(studentDetail)
+          .put(studentUpdate)
+          .delete(studentDelete);
 
 
  const port = 3000;
