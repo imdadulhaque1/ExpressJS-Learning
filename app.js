@@ -8,13 +8,14 @@ const db = require('./db');
           response.send("Hello from express js !");
  });
 
- app.get('/api/students', (request, response) => {
+ const studentList = (request, response) => {
           db.getDBStudents()
                     .then(students =>{
                               response.send(students);
                     })
- });
- app.post('/api/students', (request, response) => {
+ };
+
+ const newStudent = (request, response) => {
           const student = request.body;
           db.getDBStudents()
                     .then(students =>{
@@ -24,9 +25,9 @@ const db = require('./db');
                                                   response.send(student);
                                         })
                     })
- });
+ };
 
- app.get('/api/students/:id', (request, response) =>{
+ const studentDetail = (request, response) =>{
           const id=parseInt(request.params.id);
           db.getDBStudents()
                     .then(students=>{
@@ -34,9 +35,9 @@ const db = require('./db');
                               if(!student) response.status(404).send("No student found with this ID!");
                               else response.send(student);
                     })
- })
+ };
 
- app.put('/api/students/:id', (request, response) =>{
+ const studentUpdate = (request, response) =>{
           const id = parseInt(request.params.id);
           const updatedData = request.body;
           db.getDBStudents()
@@ -50,9 +51,9 @@ const db = require('./db');
                                                   .then(msg => response.send(updatedData));
                               }
                     })
- } )
+ };
 
- app.delete('/api/students/:id', (request, response) =>{
+ const studentDelete = (request, response) =>{
           const id =parseInt(request.params.id);
           db.getDBStudents()
                     .then(students=>{
@@ -62,7 +63,14 @@ const db = require('./db');
                               db.insertDbStudent(updatedStudents)
                                         .then(msg => response.send(student));
                     })
- })
+ };
+
+
+ app.get('/api/students', studentList);
+ app.post('/api/students', newStudent);
+ app.get('/api/students/:id', studentDetail);
+ app.put('/api/students/:id', studentUpdate);
+ app.delete('/api/students/:id', studentDelete);
 
 
  const port = 3000;
